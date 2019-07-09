@@ -1,19 +1,29 @@
 contacten = {}
 
 def main():
-    keuzemenu = input("m: maak nieuw contact" + "\n" + "t: toon je contactenlijst" + "\n" + "s: stop je programma" + "\n" + "v: verwijder contact" + "\n" + "a: contact aanpassen" + "\n" + "o: contact opslaan")
-    if keuzemenu == 'm':
-        nieuw_contact()
-    elif keuzemenu == 't':
-        toon_contacten()
-    elif keuzemenu == 'v':
-        verwijder_contact()
-    elif keuzemenu == 'a':
-        contact_aanpassen()
-    elif keuzemenu == 'o':
-        contact_opslaan()
-    elif keuzemenu == 's':
-        exit()
+    menu()
+    keuze = input("Maak een keuze")
+    while keuze != 's':
+        if keuze == 'm':
+            nieuw_contact()
+        elif keuze == 't':
+            toon_contacten()
+        elif keuze == 'v':
+            verwijder_contact()
+        elif keuze == 'a':
+            contact_aanpassen()
+        elif keuze == 'o':
+            contact_opslaan()
+        menu()
+        keuze = input("Maak een keuze")
+
+def menu():
+    print("m: maak nieuw contact")
+    print("t: toon je contactenlijst")
+    print("s: stop je programma")
+    print("v: verwijder contact")
+    print("a: contact aanpassen")
+    print("o: contact opslaan")
 
 def toon_contacten():
     print("-"*10)
@@ -21,19 +31,16 @@ def toon_contacten():
     print("-"*10)
     print('\n'.join("{}: {}".format(k, v) for k, v in contacten.items()))
     print("\n"*6)
-    main()
 
 def verwijder_contact():
     verwijderen = input("noem het contact dat je wil verwijderen")
     del contacten[verwijderen]
-    main()
 
 def nieuw_contact():
     naam = input("geef een naam voor je contact")
     nummer = input("geef het telefoonnummer van je contact")
     print("dit is je contact " + naam + " " + nummer)
     contacten[naam] = nummer
-    main()
 
 def contact_aanpassen():
     print("-"*10)
@@ -50,8 +57,6 @@ def contact_aanpassen():
         print("-" * 10)
         print('\n'.join("{}: {}".format(k, v) for k, v in contacten.items()))
         print("\n" * 6)
-        main()
-    else: main()
 
 def contact_opslaan():
     for contact in contacten:
@@ -66,6 +71,5 @@ def contact_opslaan():
             f.write(contact + " " + contacten[contact] + "\n")
         f.close()
         print("je lijst is opgeslagen in contact.txt")
-        main()
 
 main()
