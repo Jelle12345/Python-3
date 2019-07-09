@@ -2,20 +2,25 @@ contacten = {}
 
 def main():
     keuzemenu = input("m: maak nieuw contact" + "\n" + "t: toon je contactenlijst" + "\n" + "s: stop je programma" + "\n" + "v: verwijder contact" + "\n" + "a: contact aanpassen" + "\n" + "o: contact opslaan")
-    while keuzemenu != 's':
-        if keuzemenu == 'm':
-            nieuw_contact()
-        elif keuzemenu == 't':
-            toon_contacten()
-        elif keuzemenu == 'v':
-            verwijder_contact()
-        elif keuzemenu == 'a':
-            contact_aanpassen()
-        elif keuzemenu == 'o':
-            contact_opslaan()
+    if keuzemenu == 'm':
+        nieuw_contact()
+    elif keuzemenu == 't':
+        toon_contacten()
+    elif keuzemenu == 'v':
+        verwijder_contact()
+    elif keuzemenu == 'a':
+        contact_aanpassen()
+    elif keuzemenu == 'o':
+        contact_opslaan()
+    elif keuzemenu == 's':
+        exit()
 
 def toon_contacten():
-    print(contacten)
+    print("-"*10)
+    print("Uw contacten: ")
+    print("-"*10)
+    print('\n'.join("{}: {}".format(k, v) for k, v in contacten.items()))
+    print("\n"*6)
     main()
 
 def verwijder_contact():
@@ -31,18 +36,30 @@ def nieuw_contact():
     main()
 
 def contact_aanpassen():
-    print(contacten)
+    print("-"*10)
+    print("Uw contacten: ")
+    print("-"*10)
+    print('\n'.join("{}: {}".format(k, v) for k, v in contacten.items()))
+    print("\n"*6)
     aanpas = input("geef de naam van je contact dat je wil aanpassen")
     if aanpas in contacten:
         mobielnummer = input("geef je nieuwe telefoonnummer")
         contacten[aanpas] = mobielnummer;
-        print(contacten)
+        print("-" * 10)
+        print("Uw contacten: ")
+        print("-" * 10)
+        print('\n'.join("{}: {}".format(k, v) for k, v in contacten.items()))
+        print("\n" * 6)
         main()
     else: main()
 
 def contact_opslaan():
     for contact in contacten:
-        print(contact)
+        print("-" * 10)
+        print("Uw contacten: ")
+        print("-" * 10)
+        print('\n'.join("{}: {}".format(k, v) for k, v in contacten.items()))
+        print("\n" * 6)
     with open("contact.txt","w+") as f:
         contacten1 = "".join(contacten)
         for contact in contacten:
@@ -50,6 +67,5 @@ def contact_opslaan():
         f.close()
         print("je lijst is opgeslagen in contact.txt")
         main()
-
 
 main()
